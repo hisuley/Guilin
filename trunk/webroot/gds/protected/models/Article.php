@@ -77,4 +77,81 @@ class Article extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+	/**
+	 * 添加文章
+         * @type static
+         * @param array $data
+         * @return bool|int
+	 */
+	public static function addNew()
+	{
+                $model = new Article;
+                if (isset($_POST['data'])) {
+                    $model->attributes = $_POST['data'];
+                    $model->add_time = date('Y-m-d');
+
+                    if ($model->save()) {
+                        Yii::app()->end($model->id);
+                    } else {
+                        Yii::app()->end('false');
+                    }
+                }
+                $this->render('addNew', array ('model' => $model ));
+	}
+        
+        /**
+	 * 更新文章
+         * @type static
+         * @param array $data
+         * @return bool
+	 */
+	public static function updateInfo($id)
+	{
+                $model=self::loadModel($id);
+                if (isset($_POST['data'])) {
+                    $model->attributes = $_POST['data'];
+                    if ($model->save()) {
+                        Yii::app()->end('true');
+                    } else {
+                        Yii::app()->end('false');
+                    }
+                }
+                $this->render('updateInfo', array ('model' => $model ));
+	}
+        
+        /**
+	 * 获取文章列表
+         * @type static
+         * @param array $filters
+         * @return CActiveRecord
+	 */
+	public static function getList()
+	{ 
+            $model = new Article();
+            $criteria = new CDbCriteria();
+            
+            $criteria->addInCondition("t.id", $_POST['filters']['id']); 
+            $criteria->order = 't.id DESC';
+            $criteria->with = array ( 'articleCat' );
+            $result = $model->findAll( $criteria );
+            var_dump($result);exit;
+            $this->render( 'index', array ( 'datalist' => $result ) );
+	}
+        
+        /**
+	 * Returns the data model based on the primary key given in the GET variable.
+	 * If the data model is not found, an HTTP exception will be raised.
+	 * @param integer $id the ID of the model to be loaded
+	 * @return User the loaded model
+	 * @throws CHttpException
+	 */
+	public static function loadModel($id)
+	{
+		$model=self::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+        
 }
