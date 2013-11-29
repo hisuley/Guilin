@@ -92,12 +92,11 @@ class Article extends CActiveRecord
                     $model->add_time = date('Y-m-d');
 
                     if ($model->save()) {
-                        Yii::app()->end($model->id);
+                        return $model->id;
                     } else {
-                        Yii::app()->end('false');
+                        return false;
                     }
                 }
-                $this->render('addNew', array ('model' => $model ));
 	}
         
         /**
@@ -112,12 +111,11 @@ class Article extends CActiveRecord
                 if (isset($_POST['data'])) {
                     $model->attributes = $_POST['data'];
                     if ($model->save()) {
-                        Yii::app()->end('true');
+                         return true;
                     } else {
-                        Yii::app()->end('false');
+                         return false;
                     }
                 }
-                $this->render('updateInfo', array ('model' => $model ));
 	}
         
         /**
@@ -131,12 +129,13 @@ class Article extends CActiveRecord
             $model = new Article();
             $criteria = new CDbCriteria();
             
-            $criteria->addInCondition("t.id", $_POST['filters']['id']); 
+            $criteria->addInCondition("t.id", intval($_POST['filters']['id'])); 
             $criteria->order = 't.id DESC';
             $criteria->with = array ( 'articleCat' );
             $result = $model->findAll( $criteria );
-            var_dump($result);exit;
-            $this->render( 'index', array ( 'datalist' => $result ) );
+            if($result){
+                return $result;
+            }
 	}
         
         /**

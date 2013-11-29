@@ -55,11 +55,12 @@ return array(
 		// uncomment the following to use a MySQL database
 		
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testGuilin',
+			'connectionString' => 'mysql:host=localhost;dbname=webmall',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => '123123',
 			'charset' => 'utf8',
+                        'enableParamLogging' => true,//增加这行
 		),
 		
 		'errorHandler'=>array(
@@ -74,11 +75,12 @@ return array(
 					'levels'=>'error, warning',
 				),
 				// uncomment the following to show log messages on web pages
-				/*
+
 				array(
 					'class'=>'CWebLogRoute',
+                                        'levels'=>'trace',     //级别为trace 
+                                        'categories'=>'system.db.*' //只显示关于数据库信息,包括数据库连接,数据库执行语句 
 				),
-				*/
 			),
 		),
 	),

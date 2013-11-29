@@ -110,6 +110,92 @@ class User extends CActiveRecord
 	}
         
         /**
+	 * 用户注册
+         * @type static
+         * @param array $userData
+         * @return bool
+	 */
+	public static function registerNewUser()
+	{
+            $model = new User;
+
+            if (isset($_POST['userData'])) {
+                $model->attributes = $_POST['userData'];
+                $model->password = $model->hashPassword($_POST['userData']['password']);
+                $model->create_time = date('Y-m-d');
+
+                if ($model->save()) {
+                    return true;
+                }
+            }
+	}
+        
+        /**
+	 * 用户登录
+         * @type static
+         * @param array $loginform
+         * @return bool
+	 */
+	public static function userLogin()
+	{
+            $model=new User;
+
+            if(isset($_POST['LoginForm']))
+            {
+                    $model->attributes=$_POST['LoginForm'];
+                    if($model->validate() && $model->login())
+                            return true;
+            }
+	}
+        
+        /**
+	 * 用户编辑信息
+         * @type static
+         * @param int $id
+         * @return bool
+	 */
+	public static function updateUserInfo($id)
+	{
+            $model=new User;
+            if(!$id)
+                throw new CHttpException(404, '记录不存在');
+            $data = $model->findByPk($id);
+            if (isset($_POST['userData'])) {
+                $password = $_POST['userData']['password'];
+                if (empty($password)) 
+                    $_POST['userData']['password'] = $model->password;
+                else 
+                    $_POST['userData']['password'] = $model->hashPassword($password);
+
+                $data->attributes = $_POST['userData'];
+
+                if ($data->save()) {
+                    return true;
+                }
+            }
+	}
+        
+        /**
+	 * 用户状态
+         * @type static
+         * @param int $id, $status
+         * @return bool
+	 */
+	public static function setUserStatus($id,$status)
+	{
+            $model=new User;
+            if(!$id)
+                throw new CHttpException(404, '记录不存在');
+
+            if ($status) {
+                $model->status = $status;
+                if ($model->save()) {
+                    return true;
+                }
+            }
+	}
+        
+        /**
         * 检测用户密码
         *
         * @return boolean
@@ -123,8 +209,8 @@ class User extends CActiveRecord
         * 密码进行加密
         * @return string password
         */
-        public function hashPassword ($password)
+        public function hashPassword ($password,$salt='lvyou')
         {
-            return md5($password.'PASSTEST');
+            return md5($password.$salt);
         }
 }

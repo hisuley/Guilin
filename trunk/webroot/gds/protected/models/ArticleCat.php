@@ -85,12 +85,11 @@ class ArticleCat extends CActiveRecord
                 $model->attributes = $_POST['data'];
 
                 if ($model->save()) {
-                    Yii::app()->end($model->id);
+                    return $model->id;
                 } else {
-                    Yii::app()->end('false');
+                    return false;
                 }
             }
-            $this->render('addNew', array ('model' => $model ));
 	}
         
         /**
@@ -105,12 +104,11 @@ class ArticleCat extends CActiveRecord
             if (isset($_POST['data'])) {
                 $model->attributes = $_POST['data'];
                 if ($model->save()) {
-                    Yii::app()->end('true');
+                    return true;
                 } else {
-                    Yii::app()->end('false');
+                    return false;
                 }
             }
-            $this->render('updateInfo', array ('model' => $model ));
 	}
         
         /**
@@ -124,11 +122,12 @@ class ArticleCat extends CActiveRecord
             $model = new ArticleCat();
             $criteria = new CDbCriteria();
             
-            $criteria->addInCondition("t.id", $_POST['filters']['id']); 
+            $criteria->addInCondition("t.id", intval($_POST['filters']['id'])); 
             $criteria->order = 't.id DESC';
             $result = $model->findAll( $criteria );
-            var_dump($result);exit;
-            $this->render( 'index', array ( 'datalist' => $result ) );
+            if($result){
+                return $result;
+            }
 	}
         
          /**
@@ -143,11 +142,12 @@ class ArticleCat extends CActiveRecord
             $criteria = new CDbCriteria();
             
             $criteria->condition='id=:id';
-            $criteria->params=array(':id'=>$_POST['catid']);
+            $criteria->params=array(':id'=>intval($_POST['catid']));
             $criteria->select='cat_name';
             $result = $model->find( $criteria );
-            var_dump($result);exit;
-            $this->render( 'index', array ( 'datalist' => $result ) );
+            if($result){
+                return $result;
+            }
 	}
         
         /**
