@@ -1,7 +1,7 @@
 <?php
 
 /**
- * "{{users}}" 数据表模型类.
+ * "{{imall_users}}" 数据表模型类.
  *
  */
 class Users extends CActiveRecord
@@ -94,15 +94,16 @@ class Users extends CActiveRecord
             $user_email = trim( $_POST['filters']['user_email'] );
             $locked = intval( $_POST['filters']['locked'] );
             $rank_id = intval( $_POST['filters']['rank_id'] );
-            $begin_time = trim( $_POST['filters']['begin_time'] ).' 00:00:00';
-            $end_time = trim( $_POST['filters']['end_time'] ).' 00:00:00';
+            $begin_time = trim( $_POST['filters']['begin_time'] );
+            $end_time = trim( $_POST['filters']['end_time'] );
             $user_name && $condition .= ' AND user_name LIKE \'%' . $user_name . '%\'';
             $user_email && $condition .= ' AND user_email LIKE \'%' . $user_email . '%\'';
             $locked && $condition .= ' AND locked= ' . $locked;
             $rank_id && $condition .= ' AND rank_id= ' . $rank_id;
-            $begin_time && $condition .= ' AND reg_time >=  ' . "'$begin_time'" ;
-            $end_time && $condition .= ' AND reg_time <= ' . "'$end_time'" ;
+            $begin_time && $condition .= ' AND reg_time >=  ' . "'$begin_time 00:00:00'" ;
+            $end_time && $condition .= ' AND reg_time <= ' . "'$end_time 00:00:00'" ;
             $criteria->condition = $condition;
+            $criteria->with = array('userRank');
             $criteria->order = 'user_id DESC';
             $result = $model->findAll( $criteria );
             return $result;

@@ -232,3 +232,140 @@ Stack trace:
 #12 {main}
 REQUEST_URI=/index.php?r=test/GetRankList
 ---
+2013/11/30 10:47:18 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "UserRank" is not defined in active record class "Users".' in C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php:226
+Stack trace:
+#0 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'UserRank')
+#1 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(909): CActiveFinder->__construct(Object(Users), Array)
+#3 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(1355): CActiveRecord->getActiveFinder(Array)
+#4 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#5 C:\server\www\Guilin\trunk\webroot\gds\protected\models\Users.php(108): CActiveRecord->findAll(Object(CDbCriteria))
+#6 C:\server\www\Guilin\trunk\webroot\gds\protected\controllers\TestController.php(37): Users::getUserList()
+#7 C:\server\www\Guilin\trunk\yii\framework\web\actions\CInlineAction.php(49): TestController->actionGetUserList()
+#8 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\server\www\Guilin\trunk\yii\framework\web\CWebApplication.php(282): CController->run('getuserlist')
+#12 C:\server\www\Guilin\trunk\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('test/getuserlis...')
+#13 C:\server\www\Guilin\trunk\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\server\www\Guilin\trunk\webroot\gds\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/index.php?r=test/getuserlist
+---
+2013/11/30 13:24:57 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "adminGroup" is not defined in active record class "Users".' in C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php:226
+Stack trace:
+#0 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'adminGroup')
+#1 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(909): CActiveFinder->__construct(Object(Users), Array)
+#3 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(1355): CActiveRecord->getActiveFinder(Array)
+#4 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#5 C:\server\www\Guilin\trunk\webroot\gds\protected\models\AdminUser.php(81): CActiveRecord->findAll(Object(CDbCriteria))
+#6 C:\server\www\Guilin\trunk\webroot\gds\protected\controllers\TestController.php(84): AdminUser::getAdminUserList()
+#7 C:\server\www\Guilin\trunk\yii\framework\web\actions\CInlineAction.php(49): TestController->actionGetAdminUserList()
+#8 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\server\www\Guilin\trunk\yii\framework\web\CWebApplication.php(282): CController->run('GetAdminUserLis...')
+#12 C:\server\www\Guilin\trunk\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('test/GetAdminUs...')
+#13 C:\server\www\Guilin\trunk\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\server\www\Guilin\trunk\webroot\gds\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/index.php?r=test/GetAdminUserList
+---
+2013/11/30 13:32:10 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "adminGroup" is not defined in active record class "Users".' in C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php:226
+Stack trace:
+#0 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'adminGroup')
+#1 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(909): CActiveFinder->__construct(Object(Users), Array)
+#3 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(1355): CActiveRecord->getActiveFinder(Array)
+#4 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#5 C:\server\www\Guilin\trunk\webroot\gds\protected\models\AdminUser.php(81): CActiveRecord->findAll(Object(CDbCriteria))
+#6 C:\server\www\Guilin\trunk\webroot\gds\protected\controllers\TestController.php(84): AdminUser::getAdminUserList()
+#7 C:\server\www\Guilin\trunk\yii\framework\web\actions\CInlineAction.php(49): TestController->actionGetAdminUserList()
+#8 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\server\www\Guilin\trunk\yii\framework\web\CWebApplication.php(282): CController->run('GetAdminUserLis...')
+#12 C:\server\www\Guilin\trunk\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('test/GetAdminUs...')
+#13 C:\server\www\Guilin\trunk\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\server\www\Guilin\trunk\webroot\gds\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/index.php?r=test/GetAdminUserList
+---
+2013/11/30 13:32:10 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "adminGroup" is not defined in active record class "Users".' in C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php:226
+Stack trace:
+#0 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'adminGroup')
+#1 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(909): CActiveFinder->__construct(Object(Users), Array)
+#3 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(1355): CActiveRecord->getActiveFinder(Array)
+#4 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#5 C:\server\www\Guilin\trunk\webroot\gds\protected\models\AdminUser.php(81): CActiveRecord->findAll(Object(CDbCriteria))
+#6 C:\server\www\Guilin\trunk\webroot\gds\protected\controllers\TestController.php(84): AdminUser::getAdminUserList()
+#7 C:\server\www\Guilin\trunk\yii\framework\web\actions\CInlineAction.php(49): TestController->actionGetAdminUserList()
+#8 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\server\www\Guilin\trunk\yii\framework\web\CWebApplication.php(282): CController->run('GetAdminUserLis...')
+#12 C:\server\www\Guilin\trunk\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('test/GetAdminUs...')
+#13 C:\server\www\Guilin\trunk\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\server\www\Guilin\trunk\webroot\gds\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/index.php?r=test/GetAdminUserList
+---
+2013/11/30 13:32:11 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "adminGroup" is not defined in active record class "Users".' in C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php:226
+Stack trace:
+#0 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'adminGroup')
+#1 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(909): CActiveFinder->__construct(Object(Users), Array)
+#3 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(1355): CActiveRecord->getActiveFinder(Array)
+#4 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#5 C:\server\www\Guilin\trunk\webroot\gds\protected\models\AdminUser.php(81): CActiveRecord->findAll(Object(CDbCriteria))
+#6 C:\server\www\Guilin\trunk\webroot\gds\protected\controllers\TestController.php(84): AdminUser::getAdminUserList()
+#7 C:\server\www\Guilin\trunk\yii\framework\web\actions\CInlineAction.php(49): TestController->actionGetAdminUserList()
+#8 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\server\www\Guilin\trunk\yii\framework\web\CWebApplication.php(282): CController->run('GetAdminUserLis...')
+#12 C:\server\www\Guilin\trunk\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('test/GetAdminUs...')
+#13 C:\server\www\Guilin\trunk\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\server\www\Guilin\trunk\webroot\gds\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/index.php?r=test/GetAdminUserList
+---
+2013/11/30 13:32:11 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "adminGroup" is not defined in active record class "Users".' in C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php:226
+Stack trace:
+#0 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'adminGroup')
+#1 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(909): CActiveFinder->__construct(Object(Users), Array)
+#3 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(1355): CActiveRecord->getActiveFinder(Array)
+#4 C:\server\www\Guilin\trunk\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#5 C:\server\www\Guilin\trunk\webroot\gds\protected\models\AdminUser.php(81): CActiveRecord->findAll(Object(CDbCriteria))
+#6 C:\server\www\Guilin\trunk\webroot\gds\protected\controllers\TestController.php(84): AdminUser::getAdminUserList()
+#7 C:\server\www\Guilin\trunk\yii\framework\web\actions\CInlineAction.php(49): TestController->actionGetAdminUserList()
+#8 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\server\www\Guilin\trunk\yii\framework\web\CWebApplication.php(282): CController->run('GetAdminUserLis...')
+#12 C:\server\www\Guilin\trunk\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('test/GetAdminUs...')
+#13 C:\server\www\Guilin\trunk\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\server\www\Guilin\trunk\webroot\gds\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/index.php?r=test/GetAdminUserList
+---
+2013/11/30 14:03:27 [warning] [application] Failed to set unsafe attribute "group_id" of "AdminUser".
+in C:\server\www\Guilin\trunk\webroot\gds\protected\models\AdminUser.php (95)
+in C:\server\www\Guilin\trunk\webroot\gds\protected\controllers\TestController.php (67)
+in C:\server\www\Guilin\trunk\webroot\gds\index.php (13)
+2013/11/30 14:35:17 [error] [php] Undefined variable: id (C:\server\www\Guilin\trunk\webroot\gds\protected\models\AdminUser.php:142)
+Stack trace:
+#0 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(286): TestController->runAction()
+#2 C:\server\www\Guilin\trunk\yii\framework\web\CController.php(265): TestController->runActionWithFilters()
+#3 C:\server\www\Guilin\trunk\yii\framework\web\CWebApplication.php(282): TestController->run()
+#4 C:\server\www\Guilin\trunk\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\server\www\Guilin\trunk\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#6 C:\server\www\Guilin\trunk\webroot\gds\index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=test/UpdateAdminUser
+in C:\server\www\Guilin\trunk\webroot\gds\protected\models\AdminUser.php (142)
+in C:\server\www\Guilin\trunk\webroot\gds\protected\controllers\TestController.php (79)
+in C:\server\www\Guilin\trunk\webroot\gds\index.php (13)

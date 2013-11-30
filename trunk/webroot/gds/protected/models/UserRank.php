@@ -1,7 +1,7 @@
 <?php
 
 /**
- * "{{userRank}}" 数据表模型类.
+ * "{{imall_user_rank}}" 数据表模型类.
  *
  */
 class UserRank extends CActiveRecord

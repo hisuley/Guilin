@@ -33,7 +33,7 @@ class TestController extends Controller
         //测试前台用户列表
         public function actionGetUserList()
         {
-            $_POST['filters'] = array('user_name'=>'', 'user_email'=>'', 'locked'=>'', 'rank_id'=>'', 'begin_time'=>'2013-11-28', 'end_time'=>'2013-11-28',);
+            $_POST['filters'] = array('user_name'=>'', 'user_email'=>'', 'locked'=>'', 'rank_id'=>'', 'begin_time'=>'2013-11-28', 'end_time'=>'',);
             var_dump(Users::getUserList());
         }
         
@@ -58,5 +58,41 @@ class TestController extends Controller
         public function actionDeleteRank()
         {
             var_dump(UserRank::deleteUserRank(8));
+        }
+        
+        //测试添加后台管理员
+        public function actionInsertAdminUser()
+        {
+            $_POST['adminData'] = array('admin_name'=>'liuyawei', 'admin_email'=>'liu@yawei.com', 'admin_password'=>'liuyawei', 'group_id'=>'1');
+            var_dump(AdminUser::addAdminUser());
+        }
+	//测试后台管理员登录
+        public function actionAdminUserLogin()
+        {
+            $_POST['adminForm'] = array('admin_name'=>'liuyawei', 'admin_password'=>'liuyawei');
+            var_dump(AdminUser::adminUserLogin());
+        }
+        //测试修改管理员密码
+        public function actionUpdateAdminUser()
+        {
+            $_POST['adminData'] = array('admin_id'=>2, 'admin_password'=>'liuyawei', 'newpassword'=>'123123', 'respassword'=>'123123');
+            var_dump(AdminUser::updateAdminUserPass());
+        }
+        //测试后台管理员列表
+        public function actionGetAdminUserList()
+        {
+            var_dump(AdminUser::getAdminUserList());
+        }
+        
+        //测试管理员组列表
+        public function actionGetAdminGroupList()
+        {
+            var_dump(AdminGroup::getAdminGroupList());
+        }
+        //测试添加管理员组
+        public function actionAddAdminGroup()
+        {
+            $_POST['adminGroup'] = array('group_name'=>'测试',);
+            var_dump(AdminGroup::addAdminGroup());
         }
 }
