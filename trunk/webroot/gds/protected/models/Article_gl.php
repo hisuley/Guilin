@@ -1,71 +1,74 @@
 <?php
 
 /**
- * "{{imall_article}}" 数据表模型类.
+ * "{{article}}" 数据表模型类.
  *
  */
 class Article extends CActiveRecord
 {
 	/**
-	 * @return string 相关的数据库表的名称
+	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'imall_article';
+		return 'gl_article';
 	}
 
 	/**
-	 * @return array 对模型的属性验证规则.
+	 * @return array validation rules for model attributes.
 	 */
 	public function rules()
 	{
+		// NOTE: you should only define rules for those attributes that
+		// will receive user inputs.
 		return array(
 			array('title, content', 'required'),
-			array('cat_id, admin_id', 'numerical', 'integerOnly'=>true),
-			array('short_order', 'length', 'max'=>10),
-			array('tag_color', 'length', 'max'=>100),
-			array('title, thumb, link_url,', 'length', 'max'=>255),
-			array('is_link, is_show, is_blod', 'length', 'max'=>1),
+			array('cat_id', 'numerical', 'integerOnly'=>true),
+			array('add_time', 'length', 'max'=>10),
+			array('author, author_email', 'length', 'max'=>100),
+			array('title, keywords, link', 'length', 'max'=>255),
+			array('article_type, is_open', 'length', 'max'=>1),
 			array('content', 'safe'),
-			array('article_id, cat_id, title, content, thumb, admin_id, add_time, is_link, link_url, is_show, is_blod, tag_color, short_order', 'safe', 'on'=>'search'),
+			// The following rule is used by search().
+			// @todo Please remove those attributes that should not be searched.
+			array('id, cat_id, author, title, add_time', 'safe', 'on'=>'search'),
 		);
 	}
 
 	/**
-	 * @return array 关联规则.
+	 * @return array relational rules.
 	 */
 	public function relations()
 	{
+		// NOTE: you may need to adjust the relation name and the related
+		// class name for the relations automatically generated below.
 		return array(
-                    'articleCat'=>array(self::BELONGS_TO, 'ArticleCat','cat_id','select'=>'cat_id,cat_name'),
-                    'adminUser'=>array(self::BELONGS_TO, 'AdminUser', 'admin_id', 'select'=>'admin_id,admin_name,admin_email'),
+                    'articleCat'=>array(self::BELONGS_TO, 'ArticleCat','cat_id','select'=>'id,cat_name'),
 		);
 	}
 
 	/**
-	 * @return array 自定义属性标签 (name=>label)
+	 * @return array customized attribute labels (name=>label)
 	 */
 	public function attributeLabels()
 	{
 		return array(
-			'article_id' => '文章id',
+			'id' => 'id号',
 			'cat_id' => '分类id',
 			'title' => '题目',
 			'content' => '内容',
-                        'thumb' => '图片',
-                        'admin_id' => '管理员id',
-                        'add_time' => '添加时间',
-                        'is_link' => '0不跳转,1跳转',
-                        'link_url' => '跳转url',
-                        'is_show' => '1显示，0隐藏',
-			'is_blod' => '是否加粗',
-			'tag_color' => '标题颜色',
-			'short_order' => '标题排序 ',
+			'author' => '作者',
+			'author_email' => '作者的email',
+			'keywords' => '关键字 ',
+			'article_type' => '类型',
+			'is_open' => '是否显示:1显示;0不显示',
+			'add_time' => '添加时间',
+			'link' => '外链',
 		);
 	}
 
 	/**
-	 * 返回指定的AR类的静态模型.
+	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
 	 * @return User the static model class
@@ -76,7 +79,7 @@ class Article extends CActiveRecord
 	}
         
 	/**
-	 * 添加新闻
+	 * 添加文章
          * @type static
          * @param array $data
          * @return bool|int
@@ -86,10 +89,10 @@ class Article extends CActiveRecord
                 $model = new Article;
                 if (isset($_POST['data'])) {
                     $model->attributes = $_POST['data'];
-                    $model->add_time = date('Y-m-d H:i:s', time());
-                                        
+                    $model->add_time = date('Y-m-d');
+
                     if ($model->save()) {
-                        return $model->article_id;
+                        return $model->id;
                     } else {
                         return false;
                     }
@@ -97,7 +100,7 @@ class Article extends CActiveRecord
 	}
         
         /**
-	 * 更新新闻
+	 * 更新文章
          * @type static
          * @param array $data
          * @return bool
@@ -116,7 +119,7 @@ class Article extends CActiveRecord
 	}
         
         /**
-	 * 获取新闻列表
+	 * 获取文章列表
          * @type static
          * @param array $filters
          * @return CActiveRecord
@@ -125,31 +128,16 @@ class Article extends CActiveRecord
 	{ 
             $model = new Article();
             $criteria = new CDbCriteria();
-            $criteria->order = 't.article_id DESC';
-            $criteria->with = array ( 'articleCat', 'adminUser' );
-            $criteria->condition = 't.cat_id=:catId';
-            $criteria->params = array(':catId'=>$_POST['filters']['cat_id']);
+            
+            $criteria->addInCondition("t.id", $_POST['filters']['id']); 
+            $criteria->order = 't.id DESC';
+            $criteria->with = array ( 'articleCat' );
             $result = $model->findAll( $criteria );
             if($result){
                 return $result;
             }
 	}
         
-        /**
-         * 删除新闻
-         * @type static
-         * @param int $article_id
-         * @return int bool
-         */ 
-        public static function delNew()
-        {
-            $model = new Article;
-            if(isset($_POST['article_id'])){
-                return $model->deleteByPk($_POST['article_id']);
-            }
-        }
-
-
         /**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
@@ -166,4 +154,3 @@ class Article extends CActiveRecord
 	}
         
 }
-

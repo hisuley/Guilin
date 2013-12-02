@@ -95,4 +95,63 @@ class TestController extends Controller
             $_POST['adminGroup'] = array('group_name'=>'测试',);
             var_dump(AdminGroup::addAdminGroup());
         }
+        
+        //测试咨询管理添加新闻
+        public function actionAddArticle(){
+            $_POST['data'] = array('cat_id'=>4, 'title'=>'testarticle_title', 'content'=>'testarticle_content', 'thumb'=>'http://test.test.com/10755583382,jpg', 'admin_id'=>2, 'tag_color'=>'test_color', 'short_order'=>1);
+            var_dump(Article::addNew());
+        }
+        //测试咨询管理编辑新闻
+        public function actionUpdateArticle(){
+            $_POST['data'] = array('cat_id'=>4, 'title'=>'123testarticle_title', 'content'=>'123testarticle_content', 'thumb'=>'h123ttp://test.test.com/10755583382,jpg', 'admin_id'=>2, 'tag_color'=>'t123est_color', 'short_order'=>1);
+            var_dump(Article::updateInfo(38));
+        }
+        //测试咨询管理新闻列表
+        public function actionGetArticleList(){
+            $_POST['filters'] = array('cat_id'=>4);
+            var_dump(Article::getList());
+        }
+        //测试咨询管理删除新闻
+        public function actionDelArticle(){
+            $_POST['article_id'] = 37;
+            var_dump(Article::delNew());
+        }
+        
+        //测试咨询管理添加新闻分类
+        public function actionAddArticleCat(){
+            $_POST['data'] = array('cat_name'=>'test_lvyou', 'parent_id'=>0, 'sort_order'=>'');
+            var_dump(ArticleCat::addNew());
+        }
+        //测试咨询管理编辑新闻分类
+        public function actionUpdateArticleCat(){
+            $_POST['data'] = array('cat_name'=>'123test_lvyou', 'parent_id'=>2, 'sort_order'=>'12');
+            var_dump(ArticleCat::updateInfo(12));
+        }
+        //测试咨询管理获取新闻列表
+        public function actionGetArticleCatList(){
+            var_dump(ArticleCat::getList());
+        }
+        
+        //测试首页轮显图片列表
+        public function actionGetIndexImages(){
+            var_dump(IndexImages::getImagesList());
+        }
+        //测试添加首页轮显图片
+        public function actionAddIndexImages(){
+            $_POST['data'] = array('name'=>'test_介绍', 'images_url'=>'http://www.baidu.com/12312312test.jpg', 'images_link'=>'http://www.baidu.com/12312312test.jpg');
+            var_dump(IndexImages::addIndexImage());
+        }
+        //测试编辑首页轮显图片
+        public function actionUpdateIndexImages(){
+            $_POST['data'] = array('name'=>'123test_介绍', 'images_url'=>'ht123tp://www.baidu.com/12312312test.jpg', 'images_link'=>'http123://www.baidu.com/12312312test.jpg');
+            var_dump(IndexImages::updateIndexImage(33));
+        }
+        //测试删除首页轮显图片
+        public function actionDelIndexImages(){
+            var_dump(IndexImages::deleteIndexImage(33));
+        }
+        //测试设置首页轮显图片显示/隐藏
+        public function actionSetIndexImages(){
+            var_dump(IndexImages::setImageStatus(37, 1));
+        }
 }

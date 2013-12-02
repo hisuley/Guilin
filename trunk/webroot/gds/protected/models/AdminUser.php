@@ -212,7 +212,7 @@ class AdminUser extends CActiveRecord
                 $ip = $_SERVER['REMOTE_ADDR'];
             }
             // IP地址合法验证
-            $ip = ( false !== ip2long( $ip ) ) ? $ip : '0.0.0.0';
+            $ip = ( false !== bindec(decbin(ip2long( $ip ) ))) ? $ip : '0.0.0.0';
             return $ip;
         }
 }
