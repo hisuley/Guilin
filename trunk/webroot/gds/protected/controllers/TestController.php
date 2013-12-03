@@ -154,4 +154,39 @@ class TestController extends Controller
         public function actionSetIndexImages(){
             var_dump(IndexImages::setImageStatus(37, 1));
         }
+        
+        //测试企业列表
+        public function actionGetShopList(){
+            $_POST['filters'] = array('shop_name'=>'', 'lock_flg'=>'', 'shop_categories'=>'', 'begin_time'=>'2013-11-26', 'end_time'=>'');
+            var_dump(ShopInfo::getShopList());
+        }
+        //测试添加店铺
+        public function actionAddShop(){
+            $_POST['data'] = array('user_id'=>2, 'shop_name'=>'test', 'shop_categories'=>3, 'shop_country'=>'中国', 'shop_province'=>'河北', 'shop_city'=>'怀来', 'shop_district'=>'沙城', 'shop_address'=>'试试', 'shop_management'=>'的萨芬', 'shop_intro'=>'text_desc');
+            var_dump(ShopInfo::addShop());
+        }
+        //测试编辑店铺
+        public function actionUpdateShop(){
+            $_POST['data'] = array('user_id'=>2, 'shop_name'=>'123test', 'shop_categories'=>3, 'shop_country'=>'中国', 'shop_province'=>'河北', 'shop_city'=>'怀来', 'shop_district'=>'沙城', 'shop_address'=>'试试', 'shop_management'=>'333的萨芬', 'shop_intro'=>'333111text_desc');
+            var_dump(ShopInfo::updateShop(3));
+        }
+        //测试设置店铺状态
+        public function actionSetShop(){
+            var_dump(ShopInfo::setShopStatus(3, 1));
+        }
+        
+        //测试添加企业
+        public function actionAddShopRequest(){
+            $_POST['data'] = array('user_id'=>'3', 'company_name'=>'test_qiye', 'person_name'=>'dave', 'credit_type'=>'idcard', 'credit_num'=>'130730199005201837', 'credit_commercial'=>'yingyezhizhao', 'company_area'=>'BJ', 'company_address'=>'河北省1231231231', 'zipcode'=>'100100', 'mobile'=>'13358675532', 'telphone'=>'010-62233535');
+            var_dump(ShopRequest::addNew());
+        }
+        //测试编辑企业
+        public function actionUpdateShopRequest(){
+            $_POST['data'] = array('user_id'=>'3', 'company_name'=>'123test_qiye', 'person_name'=>'da123ve', 'credit_type'=>'idca123rd', 'credit_num'=>'130730199005201837', 'credit_commercial'=>'yi333ngyezhizhao', 'company_area'=>'BJ', 'company_address'=>'河北省1233331231231', 'zipcode'=>'100100', 'mobile'=>'13358675532', 'telphone'=>'010-62233535');
+            var_dump(ShopRequest::updateInfo(3));
+        }
+        //测试未审核企业列表
+        public function actionGetShopRequestList(){
+            var_dump(ShopRequest::getList());
+        }
 }
