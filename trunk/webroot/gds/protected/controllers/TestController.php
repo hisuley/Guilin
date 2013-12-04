@@ -189,4 +189,43 @@ class TestController extends Controller
         public function actionGetShopRequestList(){
             var_dump(ShopRequest::getList());
         }
+        
+        //测试添加企业分类
+        public function actionAddShopCat(){
+            $_POST['data'] = array('cat_name'=>'test_shopcatname', 'parent_id'=>0, 'sort_order'=>2);
+            var_dump(ShopCategories::addShopCat());
+        }
+        //测试编辑企业分类
+        public function actionUpdateShopCat(){
+            $_POST['data'] = array('cat_name'=>'123test_shopcatname', 'parent_id'=>0, 'sort_order'=>1);
+            var_dump(ShopCategories::updateInfo(5));
+        }
+        //测试获取企业分类列表
+        public function actionGetShopCatList(){
+            var_dump(ShopCategories::getList());
+        }
+        //测试删除企业分类
+        public function actionDelShopCat(){
+            var_dump(ShopCategories::delShopCat(4));
+        }
+        //测试导出企业列表
+        public function actionExportShopCat(){
+            var_dump(ShopCategories::exportShopCat('test'));
+        }
+        
+        //测试添加企业信用等级
+        public function actionAddIntegral(){
+            $_POST['data'] = array('int_grade'=>6, 'int_min'=>401, 'int_max'=>500, 'int_img'=>'www/www/www.jpg' );
+            var_dump(Integral::addIntegral());
+        }
+        //测试修改企业信用等级
+        public function actionUpdateIntegral(){
+            $_POST['data'] = array('int_grade'=>7, 'int_min'=>40122, 'int_max'=>555, 'int_img'=>'www/w213ww/www.jpg' );
+            var_dump(Integral::updateIntegral(10));
+        }
+        //测试删除企业信用等级
+        public function actionDelIntegral(){
+            var_dump(Integral::delIntegral(10));
+        }
+        
 }
