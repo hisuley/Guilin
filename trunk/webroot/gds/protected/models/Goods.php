@@ -1,17 +1,17 @@
 <?php
 
 /**
- * "{{imall_article}}" 数据表模型类.
+ * "{{imall_goods}}" 数据表模型类.
  *
  */
-class Article extends CActiveRecord
+class Goods extends CActiveRecord
 {
 	/**
 	 * @return string 相关的数据库表的名称
 	 */
 	public function tableName()
 	{
-		return 'imall_article';
+		return 'imall_goods';
 	}
 
 	/**
@@ -20,14 +20,13 @@ class Article extends CActiveRecord
 	public function rules()
 	{
 		return array(
-			array('title, content', 'required'),
-			array('cat_id, admin_id', 'numerical', 'integerOnly'=>true),
-			array('short_order', 'length', 'max'=>10),
-			array('tag_color', 'length', 'max'=>100),
-			array('title, thumb, link_url,', 'length', 'max'=>255),
-			array('is_link, is_show, is_blod', 'length', 'max'=>1),
-			array('content', 'safe'),
-			array('article_id, cat_id, title, content, thumb, admin_id, add_time, is_link, link_url, is_show, is_blod, tag_color, short_order', 'safe', 'on'=>'search'),
+			array('goods_name', 'required'),
+			array('shop_id, cat_id, ucat_id, brand_id, type_id, goods_number, transport_template_id, pv, favpv', 'numerical', 'integerOnly'=>true),
+			array('goods_price, transport_price, transport_template_price', 'length', 'max'=>10),
+			array('goods_name, keyword, goods_thumb,', 'length', 'max'=>255),
+			array('is_delete, is_best, is_new, is_hot, is_promote, is_admin_promote, is_on_sale, is_set_image, sort_order, lock_flg, is_transport_template', 'length', 'max'=>1),
+			array('goods_intro, goods_wholesale', 'safe'),
+			array('goods_id, shop_id, goods_name, cat_id, ucat_id, brand_id, type_id, goods_intro, goods_wholesale, goods_number, goods_price, transport_price, keyword, is_delete, is_best, is_new, is_hot, is_promote, is_admin_promote, is_on_sale, is_set_image, goods_thumb, pv, favpv, sort_order, add_time, last_update_time, lock_flg, is_transport_template, transport_template_id, transport_template_price', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -37,8 +36,6 @@ class Article extends CActiveRecord
 	public function relations()
 	{
 		return array(
-                    'articleCat'=>array(self::BELONGS_TO, 'ArticleCat','cat_id','select'=>'cat_id,cat_name'),
-                    'adminUser'=>array(self::BELONGS_TO, 'AdminUser', 'admin_id', 'select'=>'admin_id,admin_name,admin_email'),
 		);
 	}
 
@@ -48,19 +45,37 @@ class Article extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'article_id' => '文章id',
+			'goods_id' => '商品id',
+			'shop_id' => '店铺id',
+			'goods_name' => '商品名称',
 			'cat_id' => '分类id',
-			'title' => '题目',
-			'content' => '内容',
-                        'thumb' => '图片',
-                        'admin_id' => '管理员id',
+                        'ucat_id' => '用户自定义分类id',
+                        'brand_id' => '品牌id',
+                        'type_id' => '属性类型id',
+                        'goods_intro' => '商品详情',
+                        'goods_wholesale' => '批发说明',
+                        'goods_number' => '库存量',
+			'goods_price' => '商品价格',
+			'transport_price' => '运费',
+			'keyword' => '关键字',
+                        'is_delete' => '0为已删除',
+                        'is_best' => '1为精品',
+                        'is_new' => '1为新品',
+                        'is_hot' => '1为热销',
+                        'is_promote' => '1为特价',
+                        'is_admin_promote' => '1为管理推销的',
+                        'is_on_sale' => '0为下架,1为上架',
+                        'is_set_image' => '是否已设置图片 ',
+                        'goods_thumb' => '缩略图 ',
+                        'pv' => '关注度',
+                        'favpv' => '被收藏次数',
+                        'sort_order' => '排序',
                         'add_time' => '添加时间',
-                        'is_link' => '0不跳转,1跳转',
-                        'link_url' => '跳转url',
-                        'is_show' => '1显示，0隐藏',
-			'is_blod' => '是否加粗',
-			'tag_color' => '标题颜色',
-			'short_order' => '标题排序 ',
+                        'last_update_time' => '最后修改时间',
+                        'lock_flg' => '锁定,1为锁定',
+                        'is_transport_template' => '是否启用邮费模版',
+                        'transport_template_id' => '邮费模版id',
+                        'transport_template_price' => '认默模板运费',
 		);
 	}
 
@@ -76,20 +91,20 @@ class Article extends CActiveRecord
 	}
         
 	/**
-	 * 添加新闻
+	 * 添加商品
          * @type static
          * @param array $data
          * @return bool|int
 	 */
 	public static function addNew()
 	{
-                $model = new Article;
+                $model = new Goods;
                 if (isset($_POST['data'])) {
                     $model->attributes = $_POST['data'];
                     $model->add_time = date('Y-m-d H:i:s', time());
                                         
                     if ($model->save()) {
-                        return $model->article_id;
+                        return $model->goods_id;
                     } else {
                         return false;
                     }
@@ -97,7 +112,7 @@ class Article extends CActiveRecord
 	}
         
         /**
-	 * 更新新闻
+	 * 更新商品
          * @type static
          * @param array $data
          * @return bool
@@ -107,6 +122,7 @@ class Article extends CActiveRecord
                 $model=self::loadModel($id);
                 if (isset($_POST['data'])) {
                     $model->attributes = $_POST['data'];
+                    $model->last_update_time = date("Y-m-d H:i:s", time());
                     if ($model->save()) {
                          return true;
                     } else {
@@ -116,19 +132,25 @@ class Article extends CActiveRecord
 	}
         
         /**
-	 * 获取新闻列表
+	 * 获取商品列表
          * @type static
          * @param array $filters
          * @return CActiveRecord
 	 */
 	public static function getList()
 	{ 
-            $model = new Article();
+            $model = new Goods();
             $criteria = new CDbCriteria();
-            $criteria->order = 't.article_id DESC';
-            $criteria->with = array ( 'articleCat', 'adminUser' );
-            $criteria->condition = 't.cat_id=:catId';
-            $criteria->params = array(':catId'=>$_POST['filters']['cat_id']);
+            $criteria->select = 'goods_id, goods_name, goods_price, transport_price, goods_number, is_promote, is_on_sale, pv, add_time';
+            $condition = '1';
+            $goods_name = trim( $_POST['filters']['goods_name'] );
+            $is_promote = trim( $_POST['filters']['is_promote'] );
+            $is_on_sale = intval( $_POST['filters']['is_on_sale'] );
+            $goods_name && $condition .= ' AND goods_name LIKE \'%' . $goods_name . '%\'';
+            $is_promote && $condition .= ' AND is_promote= ' . $is_promote;
+            $is_on_sale && $condition .= ' AND is_on_sale= ' . $is_on_sale;
+            $criteria->condition = $condition;
+            $criteria->order = 'goods_id DESC';
             $result = $model->findAll( $criteria );
             if($result){
                 return $result;
@@ -136,17 +158,15 @@ class Article extends CActiveRecord
 	}
         
         /**
-         * 删除新闻
+         * 锁定商品
          * @type static
-         * @param int $article_id
+         * @param int $goods_id
          * @return int bool
          */ 
-        public static function delNew()
+        public static function lockGoods($goods_id,$lock)
         {
-            $model = new Article;
-            if(isset($_POST['article_id'])){
-                return $model->deleteByPk($_POST['article_id']);
-            }
+            $model = new Goods;
+             return $model->updateByPk($goods_id, array('lock_flg'=>$lock));
         }
 
 

@@ -228,4 +228,39 @@ class TestController extends Controller
             var_dump(Integral::delIntegral(10));
         }
         
+        //测试添加商品
+        public function actionAddGoods(){
+            $_POST['data'] = array('shop_id'=>1, 'goods_name'=>'test_goodsname', 'cat_id'=>433, 'ucat_id'=>1, 'brand_id'=>2, 'type_id'=>1, 'goods_intro'=>'testintro', 'goods_number'=>123, 'goods_price'=>132, 'transport_price'=>10, 'transport_template_price'=>2000);
+            var_dump(Goods::addNew());
+        }
+        //测试编辑商品
+        public function actionUpdateGoods(){
+            $_POST['data'] = array('shop_id'=>1, 'goods_name'=>'123test_goodsname', 'cat_id'=>433, 'ucat_id'=>1, 'brand_id'=>2, 'type_id'=>1, 'goods_intro'=>'testintro', 'goods_number'=>456, 'goods_price'=>654, 'transport_price'=>12, 'transport_template_price'=>2000);
+            var_dump(Goods::updateInfo(27));
+        }
+        //测试获取商品列表
+        public function actionGetGoodsList(){
+            $_POST['filters'] = array('goods_name'=>'test_goodsname', 'is_promote'=>'0', 'is_on_sale'=>'');
+            var_dump(Goods::getList());
+        }
+        //测试锁定商品
+        public function actionLockGoods() {
+            var_dump(Goods::lockGoods(28, 1));
+        }
+        
+        //测试添加分类
+        public function actionAddCategory(){
+            $_POST['data'] = array('cat_name'=>'testCategory', 'parent_id'=>0, 'sort_order'=>100, 'brand_id'=>101);
+            var_dump(Category::addNew());
+        }
+        //测试编辑分类
+        public function actionUpdateCategory(){
+            $_POST['data'] = array('cat_name'=>'123testCategory', 'parent_id'=>12, 'sort_order'=>110, 'brand_id'=>121, 'id'=>775);
+            var_dump(Category::updateInfo(437));
+        }
+        //测试获取分类列表
+        public function actionGetCategoryList(){
+            var_dump(Category::getList());
+        }
+        
 }
