@@ -33,7 +33,7 @@ class Category extends CActiveRecord
 	public function relations()
 	{
 		return array(
-                    'brand'=>array(self::MANY_MANY, 'Brand', 'imall_brand_category(brand_id, cat_id)'),
+                    'brandCategory'=>array(self::MANY_MANY, 'BrandCategory', 'imall_brand_category(brand_id, cat_id)'),
 		);
 	}
 
@@ -119,6 +119,18 @@ class Category extends CActiveRecord
                 return $result;
             }
 	}
+        
+        /**
+         * 删除分类
+         * @type static
+         * @param int $id
+         * @return bool
+         */
+        public static function delCategory($id){
+            $model = new Category();
+            return $model->deleteByPk($id);
+        }
+        
         /**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

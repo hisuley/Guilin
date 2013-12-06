@@ -263,4 +263,43 @@ class TestController extends Controller
             var_dump(Category::getList());
         }
         
+        //测试添加品牌
+        public function actionAddBrand(){
+            $_POST['data'] = array('brand_name'=>'test_brandname', 'brand_logo'=>'asdfa/asdfasd/asdfasd.jpg', 'brand_desc'=>'branddesc', 'site_url'=>'http://www.site.com');
+            var_dump(Brand::addBrand());
+        }
+        //测试编辑品牌
+        public function actionUpdateBrand(){
+            $_POST['data'] = array('brand_name'=>'123test_brandname', 'brand_logo'=>'asdfa/asdfasd/1333.jpg', 'brand_desc'=>'bran2222ddesc', 'site_url'=>'http://www.333site.com');
+            var_dump(Brand::updateBrand(23));
+        }
+        //测试获取品牌列表
+        public function actionGetBrandList(){
+            var_dump(Brand::getBrandList());
+        }
+        //测试删除品牌
+        public function actionDelBrand(){
+            var_dump(Brand::delBrand(25));
+        }
+        
+        //测试获取属性列表
+        public function actionGetAttributeList(){
+            $_POST['filters'] = array('cat_id'=>'');
+            var_dump(Attribute::getAttributeList());
+        }
+        //测试添加属性
+        public function actionAddAttribute(){
+            $_POST['data'] = array('cat_id'=>433, 'attr_name'=>'testattrname', 'input_type'=>0, 'attr_values'=>'text', 'sort_order'=>1, 'selectable'=>0, 'price'=>'1.25');
+            var_dump(Attribute::addAttribute());
+        }
+        //测试编辑属性
+        public function actionUpdateAttribute(){
+            $_POST['data'] = array('cat_id'=>433, 'attr_name'=>'123testattrname', 'input_type'=>1, 'attr_values'=>'tex123t', 'sort_order'=>1, 'selectable'=>0, 'price'=>'1.25');
+            var_dump(Attribute::updateAttribute(3));
+        }
+        //测试删除属性
+        public function actionDelAttibute(){
+            var_dump(Attribute::delAttribute(4));
+        }
+        
 }
